@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout'
 
-// Import your page components
 import Dashboard from './pages/Dashboard';
 import Bug from './pages/Bug';
 import Contact from './pages/Contact';

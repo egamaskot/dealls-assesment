@@ -134,7 +134,7 @@ const ArticleDetail: React.FC = () => {
     };
 
     const openGit = () => {
-        window.open('https://www.google.com', '_blank');
+        window.open('https://github.com/egamaskot/dealls-assesment', '_blank');
     };
 
     const openInstagram = () => {
