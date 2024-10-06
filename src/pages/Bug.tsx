@@ -3,6 +3,14 @@ import React from 'react';
 const About: React.FC = () => {
     return (
         <div className="max-w-3xl mx-auto p-6 mt-16 bg-white rounded-lg shadow-md">
+            <p className="text-red-600 font-bold mb-4">
+                *Note: It's recommended to use HashRouter instead of BrowserRouter when deploying to Netlify, 
+                because Netlify's hosting doesn’t support client-side routing well. HashRouter ensures the app 
+                doesn't throw a 404 error when refreshing or navigating directly to routes like /article/detail/:id.
+            </p>
+            <p className="text-red-600 font-bold mb-4">
+                I understand it may impact SEO, but it is used on Netlify to fix the routing error.
+            </p>
             <h2 className="text-2xl font-bold mb-4">Application Overview</h2>
             <p className="text-gray-700 mb-6">
                 The web application aims to provide a user-friendly experience for browsing articles through a categorized and interactive interface.

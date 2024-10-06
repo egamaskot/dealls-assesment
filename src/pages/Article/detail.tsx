@@ -5,7 +5,7 @@ import { fetchAllCategories } from '../../APICalls/article';
 import { ArticleData, Category } from '../../types/article';
 import Skeleton from '../../components/ui/skeleton';
 import JobCard from '../../components/card/job';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Share2 } from 'lucide-react';
 import { SwipeEventData, useSwipeable } from 'react-swipeable';
 import { format } from 'date-fns';
 
@@ -26,15 +26,16 @@ const noSelectStyle: React.CSSProperties = {
     userSelect: 'none',
 };
 
-
 const ArticleDetail: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+    const { id, slug } = useParams<{ id: string, slug: string }>();
     const navigate = useNavigate();
     const [article, setArticle] = useState<ArticleData | null>(null);
     const [categories, setCategories] = useState<Category[]>([]);
     const [categoryArticles, setCategoryArticles] = useState<{ [key: string]: ArticleData[] }>({});
     const [displayIndices, setDisplayIndices] = useState<{ [key: string]: number }>({});
     const [loading, setLoading] = useState(true);
+    const [showCopied, setShowCopied] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -118,6 +119,16 @@ const ArticleDetail: React.FC = () => {
     const formattedCreatedAt = format(new Date(article?.created_at || '2024-10-02T04:45:48.443695Z'), 'MMMM d, yyyy');
     const formattedUpdatedAt = format(new Date(article?.updated_at || '2024-10-02T04:45:48.443695Z'), 'MMMM d, yyyy');
 
+    const handleShare = () => {
+        const url= `${window.location.origin}/article/detail/${id}/${slug}`
+        navigator.clipboard.writeText(url).then(() => {
+            setShowCopied(true);
+            setTimeout(() => setShowCopied(false), 2000); 
+            }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    };
+
     if (loading) {
         return (
             <div className="skeleton-loading min-h-screen">
@@ -156,6 +167,14 @@ const ArticleDetail: React.FC = () => {
                                         <li>{article.title}</li>
                                     </ul>
                                 </nav>
+                                <button onClick={handleShare} className='flex flex-row align-middle items-center'>
+                                    <Share2 className="mr-2 h-4 w-4" /> Share
+                                    {showCopied && (
+                                        <span className="ml-2 text-green-500 animate-fade-in-out">
+                                        Copied!
+                                        </span>
+                                    )}
+                                </button>
                             </div>
                         </div>
                         <div dangerouslySetInnerHTML={{ __html: article.content }} className="mb-8 max-w-[800px] m-auto" />
