@@ -120,7 +120,7 @@ const ArticleDetail: React.FC = () => {
     const formattedUpdatedAt = format(new Date(article?.updated_at || '2024-10-02T04:45:48.443695Z'), 'MMMM d, yyyy');
 
     const handleShare = () => {
-        const url= `${window.location.origin}/article/detail/${id}/${slug}`
+        const url= `${window.location.origin}/#/article/detail/${id}/${slug}`
         navigator.clipboard.writeText(url).then(() => {
             setShowCopied(true);
             setTimeout(() => setShowCopied(false), 2000); 

@@ -7,7 +7,7 @@ const MainLayout = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <div className="flex flex-col min-h-screen overflow-hidden">
+        <div className="flex flex-col min-h-screen">
         <header className="sticky top-0 bg-[#6913D8] text-white shadow-md">
             <div className="container max-w-[1440px] mx-auto px-10">
                 <div className="flex items-center justify-between py-2">
@@ -42,7 +42,7 @@ const MainLayout = () => {
             </div>
         </header>
 
-        <main className="main bg-[#efedf6] pb-20">
+        <main className="main bg-[#efedf6] pb-20 overflow-hidden">
             <Outlet />
         </main>
 
